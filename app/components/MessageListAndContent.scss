@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  height: 100%;
+  .list {
+    flex: 0 0 400px;
+    overflow: auto;
+  }
+  .article {
+    flex: 1;
+    overflow: auto;
+  }
+}
