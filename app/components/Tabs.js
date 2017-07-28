@@ -9,7 +9,7 @@ export default class HomeTabs extends React.Component {
     super(props);
     this.newTabIndex = 0;
     const panes = [
-      { title: 'Tab 1', content: 'MessageListAndContent', key: '1', closable: false },
+      { title: 'Tab 1', content: 'SplitLayout', key: '1', closable: false },
       { title: 'Tab 2', content: 'MessageListAndContent', key: '2' },
       { title: 'Tab 3', content: 'MessageListAndContent', key: '3' },
     ];

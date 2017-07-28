@@ -1,8 +1,8 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "ElectronReact",
-  "version": "0.12.0",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "name": "Gal",
+  "productName": "Gal",
+  "version": "0.0.0",
+  "description": "Gal - XGB Desktop App built upon Electron and React",
   "scripts": {
     "build": "concurrently \"npm run build-main\" \"npm run build-renderer\"",
     "build-dll": "cross-env NODE_ENV=development node --trace-warnings -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.renderer.dev.dll.js --colors",
@@ -31,7 +31,7 @@
   },
   "browserslist": "electron 1.6",
   "build": {
-    "productName": "ElectronReact",
+    "productName": "Gal",
     "appId": "org.develar.ElectronReact",
     "files": [
       "dist/",
@@ -172,6 +172,7 @@
     "minimist": "^1.2.0",
     "node-sass": "^4.5.3",
     "react-addons-test-utils": "^15.6.0",
+    "react-grid-layout": "^0.14.7",
     "react-test-renderer": "^15.6.1",
     "redux-logger": "^3.0.6",
     "rimraf": "^2.6.1",
@@ -196,6 +197,7 @@
     "electron-debug": "^1.2.0",
     "font-awesome": "^4.7.0",
     "history": "^4.6.3",
+    "jquery": "^3.2.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-hot-loader": "3.0.0-beta.6",

@@ -11,10 +11,15 @@ export default class ArticleContent extends Component {
   }
   
   fetchMessage(id) {
-    getMessage(id).then(res => {
-      console.log(res.data)
-      this.setState({ msg: res.data })
-    })
+    const oldMsg = this.state.msg
+    this.setState({ msg: {} })
+    getMessage(id)
+      .then(res => {
+        this.setState({ msg: res.data })
+      })
+      .catch(err => {
+        this.setState({ msg: oldMsg })
+      })
   }
   
   componentDidMount() {
@@ -24,7 +29,8 @@ export default class ArticleContent extends Component {
   render() {
     const { msg } = this.state
     return (
-      <div>
+      <div className="message-content">
+        <h1>{msg.Title || '文章详情'}</h1>
         <div className={styles.content} dangerouslySetInnerHTML={{__html: msg.Content || ''}} />
       </div>
     )

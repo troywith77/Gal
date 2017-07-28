@@ -67,6 +67,8 @@ app.on('ready', async () => {
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
+  mainWindow.maximize();
+
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
   mainWindow.webContents.on('did-finish-load', () => {

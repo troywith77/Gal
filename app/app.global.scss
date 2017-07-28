@@ -32,3 +32,15 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #333; 
 }
+
+.react-grid-item {
+  background: #ddd;
+  border: 1px solid black;
+  &.static {
+    background: #cce;
+  }
+  &.react-grid-placeholder {
+    background: #999;
+    border: none;
+  }
+}

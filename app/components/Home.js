@@ -13,7 +13,6 @@ function square(n: number): number {
 
 export default class Home extends Component {
   render() {
-    console.log()
     return (
       <div className={styles.container}>
         <div className={styles.nav}>
