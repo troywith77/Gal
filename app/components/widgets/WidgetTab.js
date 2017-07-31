@@ -9,6 +9,8 @@ const addWidgetTab = config => WrappedComponent => class Widget extends Componen
       title: ''
     }
   }
+
+  static uiState = WrappedComponent.uiState
   
   onRemoveItem = i => {
     this.props.removeItem(i)

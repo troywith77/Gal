@@ -1,21 +1,22 @@
 import React, { Component } from 'react'
 import addWidgetTab from './WidgetTab'
 
-class WidgetOne extends Component {
+class WidgetTwo extends Component {
   constructor(props) {
     super(props)
   }
 
   static uiState = {
     minW: 2,
-    minH: 2,
-    w: 2,
-    h: 2
+    minH: 4,
+    w: 4,
+    h: 4
   }
   
   componentDidMount() {
-    this.props.setTitle('组件一')
+    this.props.setTitle('组件二')
   }
+  
   
   render() {
     return (
@@ -26,4 +27,4 @@ class WidgetOne extends Component {
   }
 }
 
-export default addWidgetTab()(WidgetOne)
+export default addWidgetTab()(WidgetTwo)

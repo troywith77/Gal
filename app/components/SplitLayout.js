@@ -4,7 +4,6 @@ import ReactGridLayout, { Responsive, WidthProvider} from 'react-grid-layout';
 import styles from './SplitLayout.scss';
 import allComponents from './all'
 import AllWidgets from './widgets/AllWidgets'
-console.log(AllWidgets)
 
 const ReactGridWidthLayout = WidthProvider(ReactGridLayout)
 const Option = Select.Option
@@ -32,23 +31,18 @@ export default class MyFirstGrid extends Component {
     })
   }
 
-  onWidthChange = (containerWidth, margin, cols, containerPadding) => {
-    console.log(2)
-    console.log(containerWidth, margin, cols, containerPadding)
-  }
-
   onSelect = (value) => {
     if(!value) return false
+    const uiState = AllWidgets[value].uiState
     this.setState({
       layout: [
         ...this.state.layout, {
-          i: String(Math.random()), x: 0, y: Infinity, w: 4, h: 4, minW: 2, component: value
+          i: String(Math.random()), x: 0, y: Infinity, component: value, ...uiState
         }
       ]
     })
   }
 
-  onAddItem = () => {}
   onRemoveItem = (i) => {
     this.setState({
       layout: this.state.layout.filter(item => item.i !== i)
@@ -76,6 +70,8 @@ export default class MyFirstGrid extends Component {
       <div>
         <Select onChange={this.onSelect} style={{width: 200}} allowClear>
           <Option value="WidgetOne">组件一</Option>
+          <Option value="WidgetTwo">组件二</Option>
+          <Option value="Clock">时钟</Option>
         </Select>
         <ReactGridWidthLayout 
           className={styles.layout} 
@@ -84,7 +80,7 @@ export default class MyFirstGrid extends Component {
           onWidthChange={this.onWidthChange}
           rowHeight={30}
           cols={24}
-          containerPadding={[15, 15]}
+          containerPadding={[20, 20]}
           draggableHandle=".widget-drag"
         >
           {this.state.layout.map(this.createElement)}

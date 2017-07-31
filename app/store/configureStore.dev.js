@@ -49,6 +49,7 @@ const configureStore = (initialState?: counterStateType) => {
 
   // Create Store
   const store = createStore(rootReducer, initialState, enhancer);
+  window.store = store
 
   if (module.hot) {
     module.hot.accept('../reducers', () =>

@@ -194,6 +194,7 @@
     "antd": "^2.12.2",
     "axios": "^0.16.2",
     "classnames": "^2.2.5",
+    "date-fns": "^1.28.5",
     "devtron": "^1.4.0",
     "electron-debug": "^1.2.0",
     "font-awesome": "^4.7.0",

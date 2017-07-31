@@ -46,6 +46,9 @@ export default class HomeTabs extends React.Component {
     this.setState({ panes, activeKey });
   }
   render() {
+    const { state } = this.props
+    const { tabs } = state
+    
     return (
       <Tabs
         onChange={this.onChange}
@@ -53,11 +56,13 @@ export default class HomeTabs extends React.Component {
         type="editable-card"
         onEdit={this.onEdit}
       >
-        {this.state.panes.map(pane => {
+        {tabs.panes.map(pane => {
           const Comp = allComponent[pane.content]
-          return <TabPane tab={pane.title} key={pane.key} closable={pane.closable}>
-            <div style={{height: 'calc(100vh - 42px)', overflowY: 'auto', overflowX: 'hidden'}}><Comp messages={[{Id: 1}]} /></div>
-          </TabPane>
+          return (
+            <TabPane tab={pane.title} key={pane.key} closable={pane.closable}>
+              <Comp  />
+            </TabPane>
+          )
         })}
       </Tabs>
     );

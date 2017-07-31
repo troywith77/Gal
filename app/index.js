@@ -5,6 +5,7 @@ import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
 import './app.global.scss';
 import './utils/imageWindow'
+import './ipcRenderer'
 
 const store = configureStore();
 

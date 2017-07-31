@@ -10,7 +10,7 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain as ipc } from 'electron';
 import MenuBuilder from './menu';
 
 let mainWindow = null;
@@ -78,6 +78,16 @@ app.on('ready', async () => {
     mainWindow.show();
     mainWindow.focus();
   });
+
+  mainWindow.webContents.on('will-navigate', (e, url) => {
+    e.preventDefault()
+    mainWindow.webContents.send('new-window', url)
+  })
+
+  mainWindow.webContents.on('new-window', (e, url) => {
+    e.preventDefault()
+    mainWindow.webContents.send('new-window', url)
+  })
 
   mainWindow.on('closed', () => {
     mainWindow = null;
