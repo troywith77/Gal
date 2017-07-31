@@ -56,7 +56,7 @@ export default class HomeTabs extends React.Component {
         {this.state.panes.map(pane => {
           const Comp = allComponent[pane.content]
           return <TabPane tab={pane.title} key={pane.key} closable={pane.closable}>
-            <div style={{height: 'calc(100vh - 42px)'}}><Comp messages={[{Id: 1}]} /></div>
+            <div style={{height: 'calc(100vh - 42px)', overflowY: 'auto', overflowX: 'hidden'}}><Comp messages={[{Id: 1}]} /></div>
           </TabPane>
         })}
       </Tabs>

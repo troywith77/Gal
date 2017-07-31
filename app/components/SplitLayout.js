@@ -3,14 +3,14 @@ import { Select } from 'antd';
 import ReactGridLayout, { Responsive, WidthProvider} from 'react-grid-layout';
 import styles from './SplitLayout.scss';
 import allComponents from './all'
+import AllWidgets from './widgets/AllWidgets'
+console.log(AllWidgets)
 
 const ReactGridWidthLayout = WidthProvider(ReactGridLayout)
 const Option = Select.Option
 
 const defaultLayout = [
-  {i: 'a', x: 0, y: 0, w: 1, h: 2, component: ''},
-  {i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, component: 'ArticleContent'},
-  {i: 'c', x: 4, y: 0, w: 1, h: 2, component: ''}
+  {i: '1', x: 0, y: 0, w: 4, h: 4, component: 'WidgetOne'},
 ]
 
 export default class MyFirstGrid extends Component {
@@ -32,6 +32,11 @@ export default class MyFirstGrid extends Component {
     })
   }
 
+  onWidthChange = (containerWidth, margin, cols, containerPadding) => {
+    console.log(2)
+    console.log(containerWidth, margin, cols, containerPadding)
+  }
+
   onSelect = (value) => {
     if(!value) return false
     this.setState({
@@ -51,18 +56,17 @@ export default class MyFirstGrid extends Component {
   }
 
   createElement = (el) => {
-    var removeStyle = {
-      position: 'absolute',
-      right: '2px',
-      top: 0,
-      cursor: 'pointer'
-    };
-    const Comp = allComponents[el.component]
+    const Comp = AllWidgets[el.component]
     
     return (
-      <div key={el.i} data-grid={el}>
-        {Comp ? <Comp /> : null}
-        <span className="remove" style={removeStyle} onClick={this.onRemoveItem.bind(this, el.i)}>x</span>
+      <div key={el.i}>
+        {
+        Comp ? 
+          <Comp 
+            item={el} 
+            removeItem={this.onRemoveItem}
+          /> : null
+        }
       </div>
     );
   }
@@ -71,16 +75,17 @@ export default class MyFirstGrid extends Component {
     return (
       <div>
         <Select onChange={this.onSelect} style={{width: 200}} allowClear>
-          <Option value="ArticleContent">文章</Option>
-          <Option value="MessageListAndContent">文章列表</Option>
+          <Option value="WidgetOne">组件一</Option>
         </Select>
         <ReactGridWidthLayout 
           className={styles.layout} 
           layout={this.state.layout}
           onLayoutChange={this.onLayoutChange}
+          onWidthChange={this.onWidthChange}
           rowHeight={30}
           cols={24}
-          autoSize={false}
+          containerPadding={[15, 15]}
+          draggableHandle=".widget-drag"
         >
           {this.state.layout.map(this.createElement)}
         </ReactGridWidthLayout>

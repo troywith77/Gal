@@ -1,0 +1,16 @@
+.widgetTab {
+  height: 100%;
+  background: #fff;
+}
+
+.widgetHeader {
+  border-bottom: 1px solid #ddd;
+  cursor: move;
+}
+
+.remove {
+  position: absolute;
+  right: 2px;
+  top: 0;
+  cursor: pointer;
+}

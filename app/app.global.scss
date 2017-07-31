@@ -18,7 +18,7 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  box-shadow: inset 0 0 6px #fff; 
   border-radius: 10px;
   border-radius: 10px;
 }
@@ -34,13 +34,14 @@ body {
 }
 
 .react-grid-item {
-  background: #ddd;
+  // background: #ddd;
   border: 1px solid black;
   &.static {
     background: #cce;
   }
   &.react-grid-placeholder {
-    background: #999;
+    // background: #999;
+    background: #f3564d;
     border: none;
   }
 }
