@@ -9,6 +9,16 @@ const initialState = {
 
 export default function tabs(state = initialState, action) {
   switch(action.type) {
+    case 'ADD_TAB': 
+      return {
+        panes: [...state.panes, {title: 'TAB $', content: 'MessageListAndContent', key: '4'}]
+      }
+    case 'POP_TAB': 
+      const panes = [...state.panes]
+      panes.pop()
+      return {
+        panes
+      }
     default:
       return state
   }

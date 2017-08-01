@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Menu, Icon, Button } from 'antd';
 
+const MenuItem = Menu.Item
+
 export default class Nav extends Component {
   render() {
     return (
@@ -10,18 +12,18 @@ export default class Nav extends Component {
         theme="dark"
         inlineCollapsed={true}
       >
-        <Menu.Item key="1">
+        <MenuItem key="1">
           <Icon type="pie-chart" />
           <span>Option 1</span>
-        </Menu.Item>
-        <Menu.Item key="2">
+        </MenuItem>
+        <MenuItem key="2">
           <Icon type="desktop" />
           <span>Option 2</span>
-        </Menu.Item>
-        <Menu.Item key="3">
+        </MenuItem>
+        <MenuItem key="3">
           <Icon type="inbox" />
           <span>Option 3</span>
-        </Menu.Item>
+        </MenuItem>
       </Menu>
     )
   }

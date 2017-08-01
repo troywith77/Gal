@@ -12,6 +12,10 @@
  */
 import { app, BrowserWindow, ipcMain as ipc } from 'electron';
 import MenuBuilder from './menu';
+const store = require('./mainStore.js');
+import { ADD_TAB } from './actions'
+
+store.dispatch(ADD_TAB())
 
 let mainWindow = null;
 
@@ -68,6 +72,7 @@ app.on('ready', async () => {
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
   mainWindow.maximize();
+  mainWindow.webContents.openDevTools()
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event

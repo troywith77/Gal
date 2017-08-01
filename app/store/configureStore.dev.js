@@ -6,6 +6,7 @@ import { createLogger } from 'redux-logger';
 import rootReducer from '../reducers';
 import * as counterActions from '../actions/counter';
 import type { counterStateType } from '../reducers/counter';
+import { electronEnhancer } from 'redux-electron-store'
 
 const history = createHashHistory();
 
@@ -45,7 +46,10 @@ const configureStore = (initialState?: counterStateType) => {
 
   // Apply Middleware & Compose Enhancers
   enhancers.push(applyMiddleware(...middleware));
-  const enhancer = composeEnhancers(...enhancers);
+  const enhancer = composeEnhancers(...enhancers, electronEnhancer({
+    dispatchProxy: a => store.dispatch(a),
+    filter: true
+  }));
 
   // Create Store
   const store = createStore(rootReducer, initialState, enhancer);

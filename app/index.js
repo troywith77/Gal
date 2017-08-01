@@ -4,8 +4,10 @@ import { AppContainer } from 'react-hot-loader';
 import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
 import './app.global.scss';
-import './utils/imageWindow'
-import './ipcRenderer'
+import './lib/react-grid-layout.global.css';
+import './lib/react-resizable.global.css';
+import './utils/imageWindow';
+import './ipcRenderer';
 
 const store = configureStore();
 

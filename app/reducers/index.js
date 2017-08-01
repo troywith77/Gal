@@ -1,15 +1,11 @@
 // @flow
 import { combineReducers } from 'redux';
 import { routerReducer as router } from 'react-router-redux';
+import tabs from './tabs'
 
-const files = require.context('.', false, /\.js$/);
-const modules = {};
-
-files.keys().forEach((key) => {
-  if (key === './index.js') return;
-  modules[key.replace(/(\.\/|\.js)/g, '')] = files(key);
+const rootReducer = combineReducers({
+  tabs, 
+  router
 });
-
-const rootReducer = combineReducers(Object.assign(modules, router));
 
 export default rootReducer;

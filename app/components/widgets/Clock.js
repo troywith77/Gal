@@ -13,11 +13,16 @@ class WidgetClock extends Component {
     w: 4,
     h: 2
   }
+
+  refreshTimer = () => {
+    this.setState({ time: format(new Date(), 'YYYY-MM-DD HH:mm:ss') })
+  }
   
   componentDidMount() {
     this.props.setTitle('时钟')
+    this.refreshTimer()
     setInterval(() => {
-      this.setState({ time: format(new Date(), 'YYYY-MM-DD HH:mm:ss') })
+      this.refreshTimer()
     }, 1000)
   }
   
