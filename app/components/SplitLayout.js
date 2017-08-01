@@ -1,6 +1,7 @@
 import React,  { Component } from 'react';
 import { Select } from 'antd';
 import ReactGridLayout, { Responsive, WidthProvider} from 'react-grid-layout';
+import settings from 'electron-settings'
 import styles from './SplitLayout.scss';
 import allComponents from './all'
 import AllWidgets from './widgets/AllWidgets'
@@ -12,10 +13,10 @@ const defaultLayout = [
   {i: '1', x: 0, y: 0, w: 4, h: 4, component: 'WidgetOne'},
 ]
 
-export default class MyFirstGrid extends Component {
+export default class SplitLayout extends Component {
   constructor(props) {
     super(props)
-    const layout = JSON.parse(window.localStorage.getItem('layout1')) || defaultLayout
+    const layout = settings.get('layout1') || defaultLayout
     this.state = {
       layout
     }
@@ -25,7 +26,7 @@ export default class MyFirstGrid extends Component {
     const layout = currentLayout.map((item, index) => {
       return Object.assign({}, this.state.layout[index], item)
     })
-    window.localStorage.setItem('layout1', JSON.stringify(layout))
+    settings.set('layout1', layout)
     this.setState({
       layout
     })
@@ -81,6 +82,7 @@ export default class MyFirstGrid extends Component {
           rowHeight={30}
           cols={24}
           containerPadding={[20, 20]}
+          margin={[10, 10]}
           draggableHandle=".widget-drag"
         >
           {this.state.layout.map(this.createElement)}
