@@ -11,11 +11,12 @@
  * @flow
  */
 import { app, BrowserWindow, ipcMain as ipc } from 'electron';
+import { autoUpdater } from "electron-updater"
 import MenuBuilder from './menu';
-const store = require('./mainStore.js');
+import store from './mainStore.js'
 import { ADD_TAB } from './actions'
 
-store.dispatch(ADD_TAB())
+if(require('electron-squirrel-startup')) app.quit();
 
 let mainWindow = null;
 
@@ -63,6 +64,8 @@ app.on('ready', async () => {
     await installExtensions();
   }
 
+  autoUpdater.checkForUpdates()
+
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
@@ -100,4 +103,40 @@ app.on('ready', async () => {
 
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
+});
+
+function sendStatusToWindow(text) {
+  setInterval(() => {
+    mainWindow.webContents.send('message', text);
+  }, 3000)
+}
+
+autoUpdater.on('checking-for-update', () => {
+  sendStatusToWindow('Checking for update...');
+})
+
+autoUpdater.on('update-available', (info) => {
+  sendStatusToWindow({msg: 'Update available.', info});
+})
+
+autoUpdater.on('update-not-available', (info) => {
+  sendStatusToWindow({msg: 'Update not available.', info});
+})
+
+autoUpdater.on('error', (err) => {
+  sendStatusToWindow({msg: 'Error in auto-updater.', err});
+})
+
+autoUpdater.on('download-progress', (progressObj) => {
+  let log_message = "Download speed: " + progressObj.bytesPerSecond;
+  log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
+  log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
+  sendStatusToWindow({log_message, progressObj});
+})
+
+autoUpdater.on('update-downloaded', (info) => {
+  sendStatusToWindow('Update downloaded; will install in 5 seconds');
+  setTimeout(function() {
+    autoUpdater.quitAndInstall();  
+  }, 5000)
 });

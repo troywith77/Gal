@@ -33,6 +33,12 @@
   "build": {
     "productName": "Gal",
     "appId": "org.develar.ElectronReact",
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://127.0.0.1:8080"
+      }
+    ],
     "files": [
       "dist/",
       "node_modules/",
@@ -187,7 +193,9 @@
     "date-fns": "^1.28.5",
     "devtron": "^1.4.0",
     "electron-debug": "^1.2.0",
+    "electron-is-dev": "^0.3.0",
     "electron-settings": "^3.1.1",
+    "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^2.8.1",
     "font-awesome": "^4.7.0",
     "history": "^4.6.3",
