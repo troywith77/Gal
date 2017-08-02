@@ -28,4 +28,8 @@ if (module.hot) {
       document.getElementById('root')
     );
   });
+  module.hot.accept('./reducers', () => {
+    ipc.sendSync('renderer-reload');
+    store.replaceReducer(require('./reducers'))
+  });
 }

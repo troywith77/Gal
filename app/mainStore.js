@@ -1,4 +1,5 @@
 // @flow
+import { ipcMain } from 'electron'
 import { createStore, applyMiddleware, compose } from 'redux';
 import { electronEnhancer } from 'redux-electron-store'
 import thunk from 'redux-thunk';
@@ -17,5 +18,11 @@ function configureStore(initialState) {
 }
 
 const store = configureStore()
+
+ipcMain.on('renderer-reload', (event, action) => {
+  delete require.cache[require.resolve('./reducers')];
+  store.replaceReducer(require('./reducers'));
+  event.returnValue = true;
+});
 
 export default store;
