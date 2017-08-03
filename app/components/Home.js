@@ -14,9 +14,7 @@ export default class Home extends Component {
           <Nav />
         </div>
         <div className={styles.tabs}>
-          <Tabs 
-            {...this.props}
-          />
+          <Tabs />
         </div>
       </div>
     );

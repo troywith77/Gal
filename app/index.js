@@ -2,7 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import Root from './containers/Root';
-import { configureStore, history } from './store/configureStore';
+import { configureStore } from './store/configureStore';
+import { createHashHistory } from 'history';
 import './app.global.scss';
 import './lib/react-grid-layout.global.css';
 import './lib/react-resizable.global.css';
@@ -10,6 +11,7 @@ import './utils/imageWindow';
 import './ipcRenderer';
 
 const store = configureStore();
+const history = createHashHistory();
 
 render(
   <AppContainer>
@@ -27,9 +29,5 @@ if (module.hot) {
       </AppContainer>,
       document.getElementById('root')
     );
-  });
-  module.hot.accept('./reducers', () => {
-    ipc.sendSync('renderer-reload');
-    store.replaceReducer(require('./reducers'))
   });
 }

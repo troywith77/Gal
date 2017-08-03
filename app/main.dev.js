@@ -12,9 +12,8 @@
  */
 import { app, BrowserWindow, ipcMain as ipc } from 'electron';
 import { autoUpdater } from "electron-updater"
+import isDev from 'electron-is-dev'
 import MenuBuilder from './menu';
-import store from './mainStore.js'
-import { ADD_TAB } from './actions'
 
 if(require('electron-squirrel-startup')) app.quit();
 
@@ -64,7 +63,9 @@ app.on('ready', async () => {
     await installExtensions();
   }
 
-  autoUpdater.checkForUpdates()
+  if(!isDev) {
+    autoUpdater.checkForUpdates()
+  }
 
   mainWindow = new BrowserWindow({
     show: false,

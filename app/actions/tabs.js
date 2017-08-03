@@ -9,3 +9,21 @@ export function POP_TAB() {
     type: 'POP_TAB'
   }
 }
+
+export function SET_TABS_ACTIVE_KEY(activeKey) {
+  return {
+    type: 'SET_TABS_ACTIVE_KEY',
+    payload: {
+      activeKey
+    }
+  }
+}
+
+export function REMOVE_TAB(targetKey) {
+  return {
+    type: 'REMOVE_TAB',
+    payload: {
+      targetKey
+    }
+  }
+}

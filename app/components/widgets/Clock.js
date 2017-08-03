@@ -21,9 +21,13 @@ class WidgetClock extends Component {
   componentDidMount() {
     this.props.setTitle('时钟')
     this.refreshTimer()
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.refreshTimer()
     }, 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
   
   render() {

@@ -1,58 +1,34 @@
 import React, { Component } from 'react';
 import { Tabs } from 'antd';
+import StoreHOC from '../containers/StoreHOC'
 import allComponent from './all'
 
 const TabPane = Tabs.TabPane
 
-export default class HomeTabs extends React.Component {
+class HomeTabs extends Component {
   constructor(props) {
     super(props);
-    this.newTabIndex = 0;
-    const panes = [
-      { title: 'Tab 1', content: 'SplitLayout', key: '1', closable: false },
-      { title: 'Tab 2', content: 'MessageListAndContent', key: '2' },
-      { title: 'Tab 3', content: 'MessageListAndContent', key: '3' },
-    ];
-    this.state = {
-      activeKey: panes[0].key,
-      panes,
-    };
   }
-
   onChange = (activeKey) => {
     this.setState({ activeKey });
+    this.props.actions.SET_TABS_ACTIVE_KEY(activeKey)
   }
   onEdit = (targetKey, action) => {
     this[action](targetKey);
   }
   add = () => {
-    const panes = this.state.panes;
-    const activeKey = `newTab${this.newTabIndex++}`;
-    panes.push({ title: 'New Tab', content: 'Content of new Tab', key: activeKey });
-    this.setState({ panes, activeKey });
+    this.props.actions.ADD_TAB()
   }
   remove = (targetKey) => {
-    let activeKey = this.state.activeKey;
-    let lastIndex;
-    this.state.panes.forEach((pane, i) => {
-      if (pane.key === targetKey) {
-        lastIndex = i - 1;
-      }
-    });
-    const panes = this.state.panes.filter(pane => pane.key !== targetKey);
-    if (lastIndex >= 0 && activeKey === targetKey) {
-      activeKey = panes[lastIndex].key;
-    }
-    this.setState({ panes, activeKey });
+    this.props.actions.REMOVE_TAB(targetKey)
   }
   render() {
-    const { state } = this.props
-    const { tabs } = state
+    const { tabs } = this.props
     
     return (
       <Tabs
         onChange={this.onChange}
-        activeKey={this.state.activeKey}
+        activeKey={tabs.activeKey}
         type="editable-card"
         onEdit={this.onEdit}
       >
@@ -60,7 +36,7 @@ export default class HomeTabs extends React.Component {
           const Comp = allComponent[pane.content]
           return (
             <TabPane tab={pane.title} key={pane.key} closable={pane.closable}>
-              <Comp  />
+              <Comp />
             </TabPane>
           )
         })}
@@ -68,3 +44,7 @@ export default class HomeTabs extends React.Component {
     );
   }
 }
+
+export default StoreHOC({
+  mapStateToProps: state => state
+})(HomeTabs)
