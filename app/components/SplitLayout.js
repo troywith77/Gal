@@ -67,12 +67,14 @@ export default class SplitLayout extends Component {
   }
 
   render() {
+    // console.log(this.state.layout)
     return (
       <div>
         <Select onChange={this.onSelect} style={{width: 200}} allowClear>
           <Option value="WidgetOne">组件一</Option>
           <Option value="WidgetTwo">组件二</Option>
           <Option value="Clock">时钟</Option>
+          <Option value="Zhutiku">主题库</Option>
         </Select>
         <ReactGridWidthLayout 
           className={styles.layout} 

@@ -11,11 +11,15 @@ const initialState = {
 export default function tabs(state = initialState, action) {
   switch(action.type) {
     case 'ADD_TAB': {
-      const activeKey = String(Math.random())
+      const { content, key, title } = action.payload
+      const tabExist = !!state.panes.filter(i => i.key === key).length
+      const panes = !tabExist ? {
+        panes: [...state.panes, { title, content, key }]
+      } : {}
       return {
         ...state,
-        activeKey,
-        panes: [...state.panes, {title: 'TAB $', content: 'MessageListAndContent', key: activeKey}]
+        ...panes,
+        activeKey: key
       }
     }      
     case 'POP_TAB': {

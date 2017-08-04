@@ -46,5 +46,5 @@ class HomeTabs extends Component {
 }
 
 export default StoreHOC({
-  mapStateToProps: state => state
+  mapStateToProps: state => ({ tabs: state.tabs })
 })(HomeTabs)

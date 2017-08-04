@@ -1,6 +1,11 @@
-export function ADD_TAB() {
+export function ADD_TAB(content = 'SplitLayout', key = String(Math.random()), title = 'TAB $') {
   return {
-    type: 'ADD_TAB'
+    type: 'ADD_TAB',
+    payload: {
+      content, 
+      key,
+      title
+    }
   }
 }
 

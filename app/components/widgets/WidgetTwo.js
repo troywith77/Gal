@@ -12,9 +12,10 @@ class WidgetTwo extends Component {
     w: 4,
     h: 4
   }
+
+  static title = '组件二'
   
   componentDidMount() {
-    this.props.setTitle('组件二')
   }
   
   

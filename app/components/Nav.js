@@ -1,30 +1,42 @@
 import React, { Component } from 'react';
 import { Menu, Icon, Button } from 'antd';
+import StoreHOC from '../containers/StoreHOC'
 
 const MenuItem = Menu.Item
 
-export default class Nav extends Component {
+class Nav extends Component {
+  onSelect = e => {
+    this.props.actions.SELECT_NAV(e.key)
+    this.props.actions.ADD_TAB(e.key, e.key, e.item.props.title)
+  }
+  
   render() {
+    const { nav } = this.props
     return (
       <Menu
-        defaultSelectedKeys={['1']}
+        selectedKeys={nav.selectedKeys}
         mode="inline"
         theme="dark"
         inlineCollapsed={true}
+        onSelect={this.onSelect}
       >
-        <MenuItem key="1">
+        <MenuItem key="Live" title="实时">
           <Icon type="pie-chart" />
-          <span>Option 1</span>
+          <span>实时</span>
         </MenuItem>
-        <MenuItem key="2">
+        <MenuItem key="Zhutiku" title="主题库">
           <Icon type="desktop" />
-          <span>Option 2</span>
+          <span>主题库</span>
         </MenuItem>
-        <MenuItem key="3">
+        <MenuItem key="Ban" title="打板神器">
           <Icon type="inbox" />
-          <span>Option 3</span>
+          <span>打板神器</span>
         </MenuItem>
       </Menu>
     )
   }
 }
+
+export default StoreHOC({
+  mapStateToProps: state => ({ nav: state.nav })
+})(Nav)

@@ -6,7 +6,7 @@ const addWidgetTab = config => WrappedComponent => class Widget extends Componen
   constructor(props) {
     super(props) 
     this.state = {
-      title: ''
+      title: WrappedComponent.title || ''
     }
   }
 
@@ -33,7 +33,7 @@ const addWidgetTab = config => WrappedComponent => class Widget extends Componen
           {this.state.title}
           <span className={styles.remove} onClick={this.onRemoveItem.bind(this, item.i)}>x</span>
         </header>
-        <div>
+        <div  className={styles.widgetTabContent}>
           <WrappedComponent 
             {...this.props} 
             setTitle={this.setTitle}

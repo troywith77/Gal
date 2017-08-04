@@ -1,9 +1,12 @@
 .widgetTab {
+  display: flex;
+  flex-direction: column;
   height: 100%;
   background: #fff;
 }
 
 .widgetHeader {
+  flex-basis: 30px;
   height: 30px;
   line-height: 30px;
   border-bottom: 1px solid #ddd;
@@ -15,4 +18,9 @@
   right: 4px;
   top: 0;
   cursor: pointer;
+}
+
+.widgetTabContent {
+  flex: 1;
+  overflow: auto;
 }

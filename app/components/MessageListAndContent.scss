@@ -2,7 +2,8 @@
   display: flex;
   height: 100%;
   .list {
-    flex: 0 0 400px;
+    flex: 1;
+    max-width: 400px;
     overflow: auto;
   }
   .article {
