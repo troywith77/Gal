@@ -1,13 +1,13 @@
 .container {
   display: flex;
-  margin-left: 64px;
+  margin-left: 140px;
 }
 
 .nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 64px;
+  width: 140px;
   min-height: 100vh;
   background: #404040;
 }

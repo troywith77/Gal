@@ -14,7 +14,7 @@ export default function tabs(state = initialState, action) {
       const { content, key, title } = action.payload
       const tabExist = !!state.panes.filter(i => i.key === key).length
       const panes = !tabExist ? {
-        panes: [...state.panes, { title, content, key }]
+        panes: [...state.panes, { ...action.payload }]
       } : {}
       return {
         ...state,

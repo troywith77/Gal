@@ -10,6 +10,7 @@
 html,
 body {
   // overflow: hidden;
+  // background: #666;
 }
 
 ::-webkit-scrollbar {
@@ -44,4 +45,8 @@ body {
     background: #f3564d;
     border: none;
   }
+}
+
+.ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+  padding: 5px 20px 4px;
 }

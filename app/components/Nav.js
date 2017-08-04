@@ -17,7 +17,6 @@ class Nav extends Component {
         selectedKeys={nav.selectedKeys}
         mode="inline"
         theme="dark"
-        inlineCollapsed={true}
         onSelect={this.onSelect}
       >
         <MenuItem key="Live" title="实时">
