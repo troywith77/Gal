@@ -6,12 +6,17 @@ let initialState = {
     { title: 'Tab 2', content: 'MessageListAndContent', key: '2' },
     { title: 'Tab 3', content: 'MessageListAndContent', key: '3' }
   ],
+  navItems: [
+    { key: 'Live', title: '实时', iconType: 'pie-chart'},
+    { key: 'Zhutiku', title: '主题库', iconType: 'desktop'},
+    { key: 'Ban', title: '打板神器', iconType: 'inbox'},
+  ],
   activeKey: '1',
   dsa: '123'
 }
 
 if(settings.has('tabs')) {
-  initialState = settings.get('tabs')
+  initialState = Object.assign(initialState, settings.get('tabs'))
 }
 
 export default function tabs(state = initialState, action) {
@@ -30,15 +35,11 @@ export default function tabs(state = initialState, action) {
       settings.set('tabs', newState)
       return newState
     }      
-    case 'POP_TAB': {
-      const panes = [...state.panes]
-      panes.pop()
-      const newState = {
-        ...state,
-        panes
+    case 'SELECT_NAV': {
+      return {
+        ...state, 
+        activeKey: action.payload.selectedKeys
       }
-      settings.set('tabs', newState)
-      return newState
     }
     case 'SET_TABS_ACTIVE_KEY': {
       const newState = {

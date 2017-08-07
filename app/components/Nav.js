@@ -6,7 +6,6 @@ const MenuItem = Menu.Item
 
 class Nav extends Component {
   onSelect = e => {
-    this.props.actions.SELECT_NAV(e.key)
     this.props.actions.ADD_TAB(e.key, e.key, e.item.props.title)
   }
 
@@ -21,16 +20,16 @@ class Nav extends Component {
   }
   
   render() {
-    const { nav } = this.props
+    const { tabs } = this.props
     return (
       <Menu
-        selectedKeys={nav.selectedKeys}
+        selectedKeys={[tabs.activeKey]}
         mode="inline"
         theme="dark"
         onSelect={this.onSelect}
       >
         {
-          nav.items.map(this.createElement)
+          tabs.navItems.map(this.createElement)
         }
       </Menu>
     )
@@ -38,5 +37,5 @@ class Nav extends Component {
 }
 
 export default StoreHOC({
-  mapStateToProps: state => ({ nav: state.nav })
+  mapStateToProps: state => ({ tabs: state.tabs })
 })(Nav)
