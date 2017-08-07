@@ -9,6 +9,16 @@ class Nav extends Component {
     this.props.actions.SELECT_NAV(e.key)
     this.props.actions.ADD_TAB(e.key, e.key, e.item.props.title)
   }
+
+  createElement = (item) => {
+    const { key, title, iconType} = item
+    return (
+      <MenuItem key={key} title={title}>
+        <Icon type={iconType} />
+        <span>{title}</span>
+      </MenuItem>
+    )
+  }
   
   render() {
     const { nav } = this.props
@@ -19,18 +29,9 @@ class Nav extends Component {
         theme="dark"
         onSelect={this.onSelect}
       >
-        <MenuItem key="Live" title="实时">
-          <Icon type="pie-chart" />
-          <span>实时</span>
-        </MenuItem>
-        <MenuItem key="Zhutiku" title="主题库">
-          <Icon type="desktop" />
-          <span>主题库</span>
-        </MenuItem>
-        <MenuItem key="Ban" title="打板神器">
-          <Icon type="inbox" />
-          <span>打板神器</span>
-        </MenuItem>
+        {
+          nav.items.map(this.createElement)
+        }
       </Menu>
     )
   }

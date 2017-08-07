@@ -1,4 +1,6 @@
-const initialState = {
+import settings from 'electron-settings'
+
+let initialState = {
   panes: [
     { title: 'Tab 1', content: 'SplitLayout', key: '1', closable: false },
     { title: 'Tab 2', content: 'MessageListAndContent', key: '2' },
@@ -8,33 +10,43 @@ const initialState = {
   dsa: '123'
 }
 
+if(settings.has('tabs')) {
+  initialState = settings.get('tabs')
+}
+
 export default function tabs(state = initialState, action) {
   switch(action.type) {
     case 'ADD_TAB': {
       const { content, key, title } = action.payload
       const tabExist = !!state.panes.filter(i => i.key === key).length
       const panes = !tabExist ? {
-        panes: [...state.panes, { ...action.payload }]
+        panes: [...state.panes, { title, content, key }]
       } : {}
-      return {
+      const newState = {
         ...state,
         ...panes,
         activeKey: key
       }
+      settings.set('tabs', newState)
+      return newState
     }      
     case 'POP_TAB': {
       const panes = [...state.panes]
       panes.pop()
-      return {
+      const newState = {
         ...state,
         panes
       }
+      settings.set('tabs', newState)
+      return newState
     }
     case 'SET_TABS_ACTIVE_KEY': {
-      return {
+      const newState = {
         ...state, 
         activeKey: action.payload.activeKey
       }
+      settings.set('tabs', newState)
+      return newState
     }
     case 'REMOVE_TAB': {
       let activeKey = state.activeKey;
@@ -49,11 +61,13 @@ export default function tabs(state = initialState, action) {
       if (lastIndex >= 0 && activeKey === targetKey) {
         activeKey = panes[lastIndex].key;
       }
-      return {
+      const newState = {
         ...state,
         panes, 
         activeKey
       }
+      settings.set('tabs', newState)
+      return newState
     }      
     default:
       return state
